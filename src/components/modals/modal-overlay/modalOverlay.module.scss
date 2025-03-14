@@ -1,0 +1,15 @@
+.inner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	overflow: hidden;
+	width: 100%;
+
+	background-color: rgba(0, 0, 0, 0.6);
+
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 100;
+}

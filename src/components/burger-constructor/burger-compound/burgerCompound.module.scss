@@ -1,0 +1,23 @@
+.compoundList {
+	position: relative;
+    width: 100%;
+}
+.inner {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+}
+
+.item {
+	position: relative;
+}
+
+.dragIcon {
+	left: -13px;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translate(-100%, -50%);
+	transform: translate(-100%, -50%);
+	z-index: 10;
+}
+

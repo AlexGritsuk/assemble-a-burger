@@ -1,0 +1,41 @@
+.header {
+	background: #1c1c21;
+	z-index: 10;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+	max-width: 1280px;
+	position: relative;
+}
+
+.logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 50px;
+}
+
+.nav {
+	width: 100%;
+}
+
+.list {
+	display: flex;	
+}
+
+.left {
+	margin-left: auto;
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	transition: color .1s;
+}
+

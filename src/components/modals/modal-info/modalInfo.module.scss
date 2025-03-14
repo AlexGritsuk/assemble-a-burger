@@ -1,0 +1,31 @@
+.content {
+	align-items: center;
+	display: flex;	
+	justify-content: center;
+	width: 720px;
+}
+
+.inner {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: relative;
+	text-align: center;
+}
+
+.img {
+	height: 240px;
+	width: 100%;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nutritional {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

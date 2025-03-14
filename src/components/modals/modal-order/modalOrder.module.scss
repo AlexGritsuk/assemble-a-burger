@@ -1,0 +1,27 @@
+.content {
+	align-items: center;
+	display: flex;	
+	justify-content: center;
+	padding-bottom: 120px;
+}
+
+.inner {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: relative;
+	text-align: center;
+}
+
+.header {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.closeIcon {
+	position: absolute;
+	top: -80px;
+	right: 40px;
+	cursor: pointer;
+}

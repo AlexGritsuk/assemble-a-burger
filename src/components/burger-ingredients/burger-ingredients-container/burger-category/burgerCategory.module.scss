@@ -1,0 +1,30 @@
+.category {
+	display: grid;
+	grid-gap: 24px;
+	grid-template-columns: 1fr 1fr;
+}
+
+.img {
+	display: block;
+	width: 100%;
+}
+
+.price {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	justify-content: center;
+}
+
+.name {
+	text-align: center;
+}
+
+.link {
+	text-decoration: none;
+
+	&:hover {
+		color: inherit;
+	}
+}
+
