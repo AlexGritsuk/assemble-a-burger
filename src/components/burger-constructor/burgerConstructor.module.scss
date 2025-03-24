@@ -1,0 +1,29 @@
+.inner {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	position: relative;
+	width: 100%;
+}
+
+.list {
+	display: flex;
+	flex: 1 1;
+	flex-direction: column;
+	height: auto;
+	max-height: calc(100% - 200px);
+	position: absolute;
+	width: 100%;
+}
+
+.compound {
+	flex: 1 1;
+	overflow-y: overlay;
+	position: relative;
+}
+
+.compoundList {
+	display: flex;
+	flex-direction: column;
+	row-gap: 16px;
+}
