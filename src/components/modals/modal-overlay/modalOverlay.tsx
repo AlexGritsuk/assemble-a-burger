@@ -1,7 +1,11 @@
 import modalOverlay from './modalOverlay.module.scss';
 
-const ModalOverlay = ({ close }: any) => {
+interface CloseProps {
+	close?: () => void
+}
+
+const ModalOverlay = ({ close }: CloseProps) => {
 	return <div onClick={close} className={modalOverlay.inner}></div>;
 };
 
-export default ModalOverlay;
+export default ModalOverlay; 

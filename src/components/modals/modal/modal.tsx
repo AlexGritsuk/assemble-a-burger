@@ -1,8 +1,8 @@
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useEffect, useState } from 'react';
 import Portal, { createContainer } from '../portal/portal';
 import modal from './modal.module.scss';
 import ModalOverlay from '../modal-overlay/modalOverlay';
+import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const MODAL_CONTAINER_ID = 'modal-container-id';
 
@@ -42,7 +42,6 @@ const Modal = ({ title, onClose, children }: ModalProps) => {
 					<p className={`text text_type_main-large mt-15 ml-10 ${modal.title}`}>
 						{title}
 					</p>
-
 					{children}
 				</div>
 			</div>

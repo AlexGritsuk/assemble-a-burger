@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import {
 	Button,
 	CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import burgerOrder from './burgerOrderSum.module.scss';
-import { useState } from 'react';
 import Modal from '@components/modals/modal/modal';
 import ModalOrder from '@components/modals/modal-order/modalOrder';
 

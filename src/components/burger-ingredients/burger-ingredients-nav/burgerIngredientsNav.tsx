@@ -1,9 +1,8 @@
-import React from 'react';
-import nav from './burger-ingredients.module.scss';
+import { useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const BurgerIngredientsNav = () => {
-	const [current, setCurrent] = React.useState('one');
+	const [current, setCurrent] = useState('one');
 	return (
 		<div style={{ display: 'flex' }}>
 			<Tab value='one' active={current === 'one'} onClick={setCurrent}>

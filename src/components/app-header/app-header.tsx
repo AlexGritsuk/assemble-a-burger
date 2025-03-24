@@ -7,9 +7,6 @@ import {
 import s from './app-header.module.scss';
 
 export const AppHeader = () => (
-
-	
-
 	<header className={`pt-4 pb-4 ${s.header}`}>
 		<div className={s.container}>
 			<a className={s.logo} href='#'>
