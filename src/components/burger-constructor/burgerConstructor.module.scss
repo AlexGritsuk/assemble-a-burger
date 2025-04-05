@@ -22,8 +22,26 @@
 	position: relative;
 }
 
+.scroll {
+	position: relative;
+	overflow-y: overlay;
+	flex: 1;
+}
+
 .compoundList {
 	display: flex;
 	flex-direction: column;
 	row-gap: 16px;
+}
+
+.span {
+	display: flex;
+	flex-direction: column;
+	row-gap: 16px;
+}
+
+.sum {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: auto;
 }

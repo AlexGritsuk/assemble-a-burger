@@ -1,15 +1,16 @@
+import { DndProvider } from 'react-dnd';
 import s from './app.module.scss';
 import { AppHeader } from '@components/app-header/app-header';
 import MainConstructor from '@components/main-constructor/mainConstructor';
-import Modal from '@components/modals/modal/modal';
-import ModalOverlay from '@components/modals/modal-overlay/modalOverlay';
-import ModalOrder from '@components/modals/modal-order/modalOrder';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 export const App = () => {
 	return (
 		<div className={s.page}>
-			<AppHeader />
-			<MainConstructor />			
+			<DndProvider backend={HTML5Backend}>
+				<AppHeader />
+				<MainConstructor />
+			</DndProvider>
 		</div>
 	);
 };

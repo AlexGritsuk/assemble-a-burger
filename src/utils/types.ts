@@ -1,4 +1,4 @@
-export type TburgerData = {
+export type TIngredients = {
 	_id: string;
 	name: string;
 	type: string;
@@ -11,10 +11,31 @@ export type TburgerData = {
 	image_mobile: string;
 	image_large: string;
 	__v: number;
+	uuid: string;
 };
 
-export type TburgerDataList = TburgerData[];
+export type TIngredientsList = TIngredients[];
 
 export type TConstructor = {
-	dataBurger: TburgerData[];
+	dataBurger: TIngredients[];
 };
+
+////////////////////////////////////// ingredientsReducer
+export interface TIngredientsState {
+	items: TIngredients[];
+	loading: boolean;
+	error?: boolean;
+	success?: boolean;
+}
+
+export interface TStateIngredients {
+	ingredients: TIngredientsState;
+}
+/////////////////////////////////////////
+
+export interface TConstructorIngredientsState {
+	bun: TIngredients | null;
+	ingr: TIngredients[];
+}
+
+export type TIngredientUUID = TIngredients & { uuid: string };

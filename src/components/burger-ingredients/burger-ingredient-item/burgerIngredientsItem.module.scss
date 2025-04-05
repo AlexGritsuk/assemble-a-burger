@@ -22,9 +22,16 @@
 
 .link {
 	text-decoration: none;
+	position: relative;
 
 	&:hover {
 		color: inherit;
 	}
+}
+
+.count {
+	position: absolute;
+	top: 0;
+	right: 15px;
 }
 
