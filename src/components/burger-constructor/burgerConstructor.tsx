@@ -1,38 +1,92 @@
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import borgerConstructor from './burgerConstructor.module.scss';
-import BurgerCompound from './burger-compound/burgerCompound';
+import burgerConstructor from './burgerConstructor.module.scss';
+import { useDrop } from 'react-dnd';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import BurgerEmpty from './burger-empty/burgerEmpty';
+import { constructorIngredientsSlice } from '@services/reducers/constructorIngredientsSlice';
+import { INGREDIENTS_MOVE } from '@services/actions/constructorIngredients';
+import BurgerElement from './burger-element/burgerElement';
+import { TIngredients } from '@utils/types';
 import BurgerOrderSum from './burger-order-sum/burgerOrderSum';
-import { TConstructor } from '@utils/types';
 
-const BurgerConstructor = ({ dataBurger }: TConstructor) => {
+const BurgerConstructor = () => {
+	const dispatch = useAppDispatch();
+
+	const constructorList = useAppSelector(
+		constructorIngredientsSlice.selectors.getconstructorIngredients
+	);
+
+	const BUN = constructorList.bun;
+	const INGR = constructorList.ingr;
+
+	const findItem = (id: string) => {
+		const item = INGR.filter((el) => `${el.uuid}` === id)[0];
+		return {
+			item,
+			index: INGR.indexOf(item),
+		};
+	};
+
+	const moveItem = (id: string, toIndex: number) => {
+		const { index } = findItem(id);
+		dispatch(INGREDIENTS_MOVE(index, toIndex));
+	};
+
+	const [, drop] = useDrop(() => ({ accept: 'ingr' }));
+
 	return (
-		<div className={`pt-15 pb-10 ${borgerConstructor.inner}`}>
-			<div className={borgerConstructor.list}>
-				<div className='mr-4 ml-10'>
-					<ConstructorElement
-						type='top'
+		<section className={`pt-15 pb-10 ${burgerConstructor.inner}`}>
+			<div className={burgerConstructor.list}>
+				{BUN ? (
+					<BurgerElement
+						ingredient={BUN}
 						isLocked={true}
-						text='Краторная булка N-200i (верх)'
-						price={200}
-						thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+						position='top'
+						type='bun'
+						moveItem={moveItem}
+						findItem={findItem}
 					/>
+				) : (
+					<BurgerEmpty isLocked={true} position='top' type='bun' />
+				)}
+				<div className={`${burgerConstructor.scroll} mt-4 mb-4`}>
+					<div>
+						{INGR.length > 0 ? (
+							<>
+								<span ref={drop} className={burgerConstructor.span}>
+									{INGR.map((el: TIngredients, uuid: number, index) => (
+										<BurgerElement
+											key={uuid}
+											ingredient={el}
+											isLocked={false}
+											type='ingredients'
+											moveItem={moveItem}
+											findItem={findItem}
+										/>
+									))}
+								</span>
+							</>
+						) : (
+							<BurgerEmpty isLocked={false} type='ingredients' />
+						)}
+					</div>
 				</div>
-				<div className={`mt-4 mb-4 pr-4 pl-10 ${borgerConstructor.compound}`}>
-					<BurgerCompound dataBurger={dataBurger} />
-				</div>
-				<div className='mr-4 ml-10'>
-					<ConstructorElement
-						type='bottom'
+				{BUN ? (
+					<BurgerElement
+						ingredient={BUN}
 						isLocked={true}
-						text='Краторная булка N-200i (низ)'
-						price={200}
-						thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+						position='bottom'
+						type='bun'
+						moveItem={moveItem}
+						findItem={findItem}
 					/>
-				</div>
+				) : (
+					<BurgerEmpty isLocked={true} position='bottom' type='bun' />
+				)}
 			</div>
-
-			<BurgerOrderSum />
-		</div>
+			<div className={`mt-10 mr-4 ${burgerConstructor.sum}`}>
+				<BurgerOrderSum INGR={INGR} BUN={BUN} />
+			</div>
+		</section>
 	);
 };
 
