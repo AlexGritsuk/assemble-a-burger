@@ -1,53 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import Portal, { createContainer } from '../portal/portal';
-import modal from './modal.module.scss';
+import { ReactNode } from 'react';
 import ModalOverlay from '../modal-overlay/modalOverlay';
+import ReactDOM from 'react-dom';
+import styles from './modal.module.scss';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const MODAL_CONTAINER_ID = 'modal-container-id';
-
 interface ModalProps {
-	title: string;
-	onClose?: () => void;
-	children: React.ReactNode | React.ReactNode[];
+	closeModal: () => void;
+	title?: string;
+	children: ReactNode;
 }
 
-const Modal = ({ title, onClose, children }: ModalProps) => {
-	const [isMounted, setMounted] = useState(false);
-
-	useEffect(() => {
-		createContainer({ id: MODAL_CONTAINER_ID });
-		setMounted(true);
-	}, []);
-
-	useEffect(() => {
-		const handleEscapePress = (event: KeyboardEvent) => {
-			if (event.key === 'Escape') {
-				onClose?.();
-			}
-		};
-		window.addEventListener('keydown', handleEscapePress);
-		return () => {
-			window.removeEventListener('keydown', handleEscapePress);
-		};
-	}, [onClose]);
-
-	return isMounted ? (
-		<Portal id={MODAL_CONTAINER_ID}>
-			<div className={modal.wrap}>
-				<div className={`pt-30 ${modal.content}`}>
-					<button onClick={onClose} className={`mt-15 mr-10 ${modal.close}`}>
+function Modal(props: {
+	closeModal: () => void;
+	title?: string;
+	children: ReactNode;
+}) {
+	return ReactDOM.createPortal(
+		<>
+			<div className={`${styles.modal} p-10 pb-15`}>
+				<div className={styles.header}>
+					<h3 className={`${styles.title} text text_type_main-large`}>
+						{props.title}
+					</h3>
+					<span
+						className={`${styles.modal__close} remove-select`}
+						onClick={props.closeModal}>
 						<CloseIcon type='primary' />
-					</button>
-					<p className={`text text_type_main-large mt-15 ml-10 ${modal.title}`}>
-						{title}
-					</p>
-					{children}
+					</span>
 				</div>
+				<div className={styles.content}>{props.children}</div>
 			</div>
-			<ModalOverlay close={onClose} />
-		</Portal>
-	) : null;
-};
+			<ModalOverlay closeModal={props.closeModal} />
+		</>,
+		document.getElementById('modals') as HTMLElement
+	);
+}
 
 export default Modal;

@@ -63,7 +63,7 @@ const BurgerOrderSum = ({ INGR, BUN }: BurgerOrderSumProps) => {
 				<div>
 					{isModalActive && (
 						<div>
-							<Modal title='' onClose={handleModalClose}>
+							<Modal title='' closeModal={handleModalClose}>
 								{!isLoading && !hasError && !requestSuccess && (
 									<div>Вы не добавили ингредиентов</div>
 								)}

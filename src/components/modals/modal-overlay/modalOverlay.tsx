@@ -1,11 +1,24 @@
-import modalOverlay from './modalOverlay.module.scss';
+import { useEffect } from 'react';
+import styles from './modalOverlay.module.scss';
 
-interface CloseProps {
-	close?: () => void
+export default function ModalOverlay({
+	closeModal,
+}: {
+	closeModal: () => void;
+}) {
+	useEffect(() => {
+		const onKeypress = (e: any) => {
+			if (e.key === 'Escape' && closeModal) {
+				closeModal();
+			}
+		};
+
+		document.addEventListener('keydown', onKeypress);
+
+		return () => {
+			document.removeEventListener('keydown', onKeypress);
+		};
+	});
+
+	return <div className={styles.overlay} onClick={closeModal}></div>;
 }
-
-const ModalOverlay = ({ close }: CloseProps) => {
-	return <div onClick={close} className={modalOverlay.inner}></div>;
-};
-
-export default ModalOverlay; 

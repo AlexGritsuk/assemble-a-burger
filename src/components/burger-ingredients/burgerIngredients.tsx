@@ -1,5 +1,4 @@
 import burgerIngredients from './burgerIngredients.module.scss';
-import { TIngredients } from '@utils/types';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { INGREDIENTS_REQEST } from '@services/actions/ingredients';
 import { BUN, INGREDIENTS, MAIN, SAUCE } from '@utils/vars';
@@ -7,27 +6,25 @@ import { ingredientsSlice } from '@services/reducers/ingredients';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsCategory from './burger-ingredient-category/burgerIngredientCategory';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { detailsIngredientSlice } from '@services/reducers/detailsIngredient';
 import Modal from '@components/modals/modal/modal';
 import ModalInfo from '@components/modals/modal-info/modalInfo';
-import { DETAILS_RESET } from '@services/actions/detailsIngredient';
 
 const BurgerIngredients = () => {
 	const [current, setCurrent] = useState('bun');
 	const isLoading = useAppSelector(ingredientsSlice.selectors.getItemsLoading);
-	const details = useAppSelector(detailsIngredientSlice.selectors.getDetails);		
+	// const details = useAppSelector(detailsIngredientSlice.selectors.getDetails);
 
-	const ingredients: TIngredients[] = useAppSelector(
+
+	const ingredients = useAppSelector(
 		ingredientsSlice.selectors.getAllItems
 	);
-	const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();	
 
 	useEffect(() => {
 		dispatch(INGREDIENTS_REQEST(INGREDIENTS));
 	}, [dispatch]);
 
-	const handleCloseModal = () => {
-		dispatch(DETAILS_RESET());
+	const handleCloseModal = () => {		
 	};
 
 	const scrollBoxRef = useRef<HTMLDivElement | null>(null);
@@ -130,9 +127,9 @@ const BurgerIngredients = () => {
 					<div>Loading...</div>
 				)}
 			</div>
-			{details && (
-				<Modal onClose={() => handleCloseModal()} title='Детали ингредиента'>
-					<ModalInfo details={details} />
+			{false && (
+				<Modal closeModal={() => handleCloseModal()} title='Детали ингредиента'>
+					<ModalInfo />
 				</Modal>
 			)}
 		</>

@@ -7,6 +7,9 @@ import { INGREDIENTS_MOVE } from '@services/actions/constructorIngredients';
 import BurgerElement from './burger-element/burgerElement';
 import { TIngredients } from '@utils/types';
 import BurgerOrderSum from './burger-order-sum/burgerOrderSum';
+import { userInfoSlice } from '@services/auth/userInfo';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const BurgerConstructor = () => {
 	const dispatch = useAppDispatch();
@@ -17,6 +20,12 @@ const BurgerConstructor = () => {
 
 	const BUN = constructorList.bun;
 	const INGR = constructorList.ingr;
+
+	const user = useAppSelector(userInfoSlice.selectors.getUser);
+	const navigate = useNavigate();
+	const location = useLocation();
+
+
 
 	const findItem = (id: string) => {
 		const item = INGR.filter((el) => `${el.uuid}` === id)[0];

@@ -7,24 +7,21 @@ import { useMemo } from 'react';
 import { DragPreviewImage, useDrag } from 'react-dnd';
 import { TIngredients } from '@utils/types';
 import { constructorIngredientsSlice } from '@services/reducers/constructorIngredientsSlice';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { DETAILS_ADD } from '@services/actions/detailsIngredient';
+import { useAppSelector } from '../../../hooks';
+import { Link, useLocation } from 'react-router-dom';
+import { INGREDIENTS_PATH } from '@utils/vars';
 
 interface BurgerIngredientsItemProps {
 	item: TIngredients;
 	type: string;
 }
 
-const BurgerIngredientsItem = ({ item, type }: BurgerIngredientsItemProps) => {
-	const dispatch = useAppDispatch();
+const BurgerIngredientsItem = ({ item, type }: BurgerIngredientsItemProps) => {	
+	const location = useLocation();
 
 	const ingredients = useAppSelector(
 		constructorIngredientsSlice.selectors.getconstructorIngredients
 	);
-
-	const handleOpenModal = (item: TIngredients) => {
-		dispatch(DETAILS_ADD(item));
-	};
 
 	const [{ opacity }, dragRef, dragPreview] = useDrag(
 		() => ({
@@ -55,15 +52,17 @@ const BurgerIngredientsItem = ({ item, type }: BurgerIngredientsItemProps) => {
 
 	return (
 		<div style={{ cursor: 'pointer' }}>
-			<article
-				ref={dragRef}
-				onClick={() => handleOpenModal(item)}
+			<DragPreviewImage connect={dragPreview} src={item.image} />
+			<Link
+				to={INGREDIENTS_PATH + '/' + item._id}
+				state={{ backgroundLocation: location }}
+				key={item._id}
+				ref={dragRef}				
 				style={{ opacity }}
 				className={`mb-8 ${styles.link}`}>
 				<span className={styles.count}>
 					{count > 0 && <Counter count={count} />}
 				</span>
-				<DragPreviewImage connect={dragPreview} src={item.image} />
 				<img
 					className={`${styles.img} pl-4 pr-4 mb-1`}
 					src={item.image}
@@ -73,8 +72,10 @@ const BurgerIngredientsItem = ({ item, type }: BurgerIngredientsItemProps) => {
 					{item.price}
 					<CurrencyIcon type='primary' />
 				</p>
-				<p className={`${styles.name} text text_type_main-default`}>{item.name}</p>
-			</article>
+				<p className={`${styles.name} text text_type_main-default`}>
+					{item.name}
+				</p>
+			</Link>
 		</div>
 	);
 };

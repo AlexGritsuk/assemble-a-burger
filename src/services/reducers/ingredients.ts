@@ -1,6 +1,9 @@
-import { PayloadAction, createSlice, createAction } from '@reduxjs/toolkit';
+import {  createSlice } from '@reduxjs/toolkit';
 import { INGREDIENTS_REQEST } from '@services/actions/ingredients';
-import { TIngredientsState, TStateIngredients } from '@utils/types';
+import {
+	TIngredients,
+	TIngredientsState,
+} from '@utils/types';
 
 const initialState: TIngredientsState = {
 	items: [],
@@ -17,6 +20,7 @@ export const ingredientsSlice = createSlice({
 		getAllItems: (state) => state.items,
 		getItemsLoading: (state) => state.loading,
 		getItemsError: (state) => state.error,
+		getItemsRequestSuccess: (state) => state.success,		
 	},
 	extraReducers: (builder) => {
 		builder
@@ -40,3 +44,15 @@ export const ingredientsSlice = createSlice({
 			}));
 	},
 });
+
+export const getIngredientsById =
+	(ingredientsId: string | undefined) => (state: any) => {
+			console.log(state.ingredients.items);
+
+		if (state.ingredients.items) {
+			
+			return state.ingredients.items.find(
+				(ingredient: TIngredients) => ingredient._id == ingredientsId
+			);
+		}
+	};
