@@ -1,10 +1,10 @@
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import order from './modalOrder.module.scss';
-import { useAppSelector } from '../../../hooks';
-import { orderSlice } from '@services/reducers/order';
+import { useAppSelector } from '../../../hooks/hooks';
+import { selectOrderNumber } from '@services/reducers/orderSlice';
 
 const ModalOrder = () => {
-	const orderNum = useAppSelector(orderSlice.selectors.getOrderNumber);
+	const orderNum = useAppSelector(selectOrderNumber);
 	return (
 		<>
 			<div className={`${order.content}`}>

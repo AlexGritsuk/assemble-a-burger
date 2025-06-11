@@ -12,6 +12,7 @@ export const USER_LOGIN = createAsyncThunk(
 			},
 			body: JSON.stringify(bodySend),
 		});
+		
 		return res;
 	}
 );

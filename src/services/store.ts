@@ -1,26 +1,26 @@
+import { logoutSlice } from './reducers/logoutSlice';
 import { configureStore, combineSlices } from '@reduxjs/toolkit';
-import { ingredientsSlice } from './reducers/ingredients';
-import { constructorIngredientsSlice } from './reducers/constructorIngredientsSlice';
-import { orderSlice } from './reducers/order';
-import { forgotSlice } from './auth/forgotPassword';
-import { registerSlice } from './auth/register';
-import { loginSlice } from './auth/login';
-import { checkAuthSlice } from './auth/checkAuth';
-import { userInfoSlice } from './auth/userInfo';
-import { updateSlice } from './auth/update'
-import { logoutSlice } from './auth/logOut';
+import { ingredientsSlice } from './reducers/ingredientsSlice';
+import { modalSlice } from './reducers/modalSlice';
+import { loadingSlice } from './reducers/loadingSlice';
+import { userSlice } from './reducers/userSlice';
+import { loginSlice } from './reducers/loginSlice';
+import { passwordSlice } from './reducers/passwordSlice';
+import { registerSlice } from './reducers/registerSlice';
+import { orderSlice } from './reducers/orderSlice';
+import { cartSlice } from './reducers/cartSlice';
 
 const rootReducer = combineSlices(
 	ingredientsSlice,
-	constructorIngredientsSlice,	
+	userSlice,
+	loadingSlice,
+	cartSlice,
 	orderSlice,
-	checkAuthSlice,
-	userInfoSlice,
-	updateSlice,
 	logoutSlice,
 	loginSlice,
+	passwordSlice,
 	registerSlice,
-	forgotSlice
+	modalSlice
 );
 
 const store = configureStore({

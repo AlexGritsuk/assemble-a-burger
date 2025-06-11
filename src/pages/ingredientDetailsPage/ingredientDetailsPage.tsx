@@ -1,38 +1,46 @@
-import {
-	getIngredientsById,
-	ingredientsSlice,
-} from '@services/reducers/ingredients';
-import { useAppSelector } from '../../hooks';
+import { selectIngredients } from '@services/reducers/ingredientsSlice';
+import { useAppSelector } from '../../hooks/hooks';
 import { useParams } from 'react-router-dom';
-import ModalInfo from '@components/modals/modal-info/modalInfo';
-import { memo, useMemo } from 'react';
+import IngredientDetails from '@components/modals/IngredientDetails/IngredientDetails';
+import { memo } from 'react';
+import clsx from 'clsx';
+import Loader from '@components/loader/loader';
+import { TIngredients } from '@utils/types';
+import styles from './ingredientDetailsPage.module.scss';
 
 const IngredientDetailsPage = () => {
-	const { id } = useParams();
-	const ingredients = useAppSelector(ingredientsSlice.selectors.getAllItems);
-	const ingredient = useMemo(
-		() => ingredients.find((item) => item._id === id),
-		[id, ingredients]
-	);
-	// const ingredientDetails = useAppSelector(getIngredientsById(id));
+	const { id } = useParams<{ id: string }>();
+	const ingredients = useAppSelector(selectIngredients);
+	const ingredient = ingredients.find((item: TIngredients) => item._id === id);
+	if (!id) {
+		return <div>Ингредиент не найден</div>;
+	}
 
-	console.log('ingredient', ingredient);
+	if (!ingredients) {
+		return <Loader />;
+	}
 
-	// const requestSuccess = useAppSelector(
-	// 	ingredientsSlice.selectors.getItemsRequestSuccess
-	// );
+	if (!ingredient) {
+		return (
+			<div
+				className={clsx(
+					styles.notFoundIngredient,
+					'text',
+					'text_type_main-large'
+				)}>
+				Ингредиент не найден
+			</div>
+		);
+	}
+
 	return (
 		<>
-			{ingredient ? (
-				<>
-					<h3 className={`text text_type_main-large align-center mt-10`}>
-						Детали ингредиента
-					</h3>
-					<ModalInfo />
-				</>
-			) : (
-				<div>Загрузка</div>
-			)}
+			<section className={styles.ingredientDetailsPage}>
+				<h3 className={`text text_type_main-large mt-30`}>
+					Детали ингредиента
+				</h3>
+				<IngredientDetails ingredient={ingredient} />
+			</section>
 		</>
 	);
 };

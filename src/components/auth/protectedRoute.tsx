@@ -1,11 +1,8 @@
-import { JSX, ReactNode } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { userInfoSlice } from '@services/auth/userInfo';
-
-import { useAppSelector } from '../../hooks';
 import { HOME_PATH, LOGIN_PATH } from '@utils/vars';
-import { loginSlice } from '@services/auth/login';
-import { logoutSlice } from '@services/auth/logOut';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/hooks';
+import { selectGetUser } from '@services/reducers/userSlice';
+import { ReactNode } from 'react';
 
 type Props = {
 	anonymous?: boolean;
@@ -16,30 +13,19 @@ const ProtectedRoute = ({
 	anonymous = false,
 	children,
 }: Props): JSX.Element => {
-	const user = useAppSelector(userInfoSlice.selectors.getUser);
-	const isLogin = useAppSelector(loginSlice.selectors.getLoginIsLiading);
-	const isLoginSuccess = useAppSelector(
-		loginSlice.selectors.getLoginRequestSuccess
-	);
-	const isLogout = useAppSelector(logoutSlice.selectors.getLogOutIsLiading);
+	const user = useAppSelector(selectGetUser);
 	const location = useLocation();
 	const from = location?.state?.from || HOME_PATH;
 
-	console.log('user: ', user);
-	console.log('isLogin', isLogin);
-	console.log('anonymous', anonymous);
-	console.log('isLoginSuccess', isLoginSuccess);
-	console.log('isLogout', isLogout);
-
-	if (anonymous && isLogin) {
+	if (anonymous && user.isLogin) {
 		return <Navigate replace={true} to={from} />;
 	}
 
-	if (!anonymous && !isLogin && isLogout) {
+	if (!anonymous && !user.isLogin && user.isLogout) {
 		return <Navigate to={HOME_PATH} />;
 	}
 
-	if (!anonymous && !isLogin) {
+	if (!anonymous && !user.isLogin) {
 		return (
 			<Navigate replace={true} state={{ from: location }} to={LOGIN_PATH} />
 		);
