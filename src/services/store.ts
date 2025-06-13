@@ -1,15 +1,26 @@
+import { logoutSlice } from './reducers/logoutSlice';
 import { configureStore, combineSlices } from '@reduxjs/toolkit';
-import { ingredientsSlice } from './reducers/ingredients';
-import { constructorIngredientsSlice } from './reducers/constructorIngredientsSlice';
-import { detailsIngredientSlice } from './reducers/detailsIngredient';
-import { orderSlice } from './reducers/order';
-// import BurgerConstructorReducer from './reducers/constructorIngredients';
+import { ingredientsSlice } from './reducers/ingredientsSlice';
+import { modalSlice } from './reducers/modalSlice';
+import { loadingSlice } from './reducers/loadingSlice';
+import { userSlice } from './reducers/userSlice';
+import { loginSlice } from './reducers/loginSlice';
+import { passwordSlice } from './reducers/passwordSlice';
+import { registerSlice } from './reducers/registerSlice';
+import { orderSlice } from './reducers/orderSlice';
+import { cartSlice } from './reducers/cartSlice';
 
 const rootReducer = combineSlices(
 	ingredientsSlice,
-	constructorIngredientsSlice,
-	detailsIngredientSlice,
-	orderSlice
+	userSlice,
+	loadingSlice,
+	cartSlice,
+	orderSlice,
+	logoutSlice,
+	loginSlice,
+	passwordSlice,
+	registerSlice,
+	modalSlice
 );
 
 const store = configureStore({

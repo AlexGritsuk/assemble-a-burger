@@ -1,0 +1,17 @@
+.ingredientDetailsPage {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	h3{
+		display: flex;
+		justify-content: center;
+	}
+}
+
+
+.notFoundIngredient {
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+}

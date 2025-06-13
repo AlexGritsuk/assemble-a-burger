@@ -7,3 +7,4 @@ module.exports = (envVars) => {
 	const config = merge(commonConfig, envConfig);
 	return config;
 };
+ 

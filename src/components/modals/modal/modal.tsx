@@ -1,53 +1,70 @@
-import React, { useEffect, useState } from 'react';
-import Portal, { createContainer } from '../portal/portal';
-import modal from './modal.module.scss';
+import { ReactNode } from 'react';
 import ModalOverlay from '../modal-overlay/modalOverlay';
+import { createPortal } from 'react-dom';
+import styles from './modal.module.scss';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-
-const MODAL_CONTAINER_ID = 'modal-container-id';
+import clsx from 'clsx';
 
 interface ModalProps {
-	title: string;
-	onClose?: () => void;
-	children: React.ReactNode | React.ReactNode[];
+	handleModalClose: () => void;
+	title?: string;
+	children?: ReactNode;
+	isModalOpen: boolean;
+	ariaTitle: string;
 }
 
-const Modal = ({ title, onClose, children }: ModalProps) => {
-	const [isMounted, setMounted] = useState(false);
-
-	useEffect(() => {
-		createContainer({ id: MODAL_CONTAINER_ID });
-		setMounted(true);
-	}, []);
-
-	useEffect(() => {
-		const handleEscapePress = (event: KeyboardEvent) => {
-			if (event.key === 'Escape') {
-				onClose?.();
+const Modal = ({
+	handleModalClose,
+	ariaTitle,
+	title,
+	children,
+	isModalOpen,
+}: ModalProps) => {
+	return createPortal(
+		<>
+			{
+				<>
+					<ModalOverlay handleModalClose={handleModalClose} />
+					<div
+						className={clsx(styles.modal, {
+							[styles.modal_opened]: isModalOpen,
+						})}
+						aria-labelledby={title ? 'modal-title' : 'aria-title'}
+						aria-modal={isModalOpen ? 'true' : 'false'}
+						onClick={(e) => e.stopPropagation()}
+						role='dialog'>
+						<div className={styles.modal__header}>
+							{title && (
+								<h3
+									className={clsx(
+										styles.modal__title,
+										'text',
+										'text_type_main-large'
+									)}
+									id='modal-title'>
+									{title}
+								</h3>
+							)}
+							{!title && (
+								<h3 className={clsx(styles.screenReader)} id='aria-title'>
+									{ariaTitle}
+								</h3>
+							)}
+							<button
+								aria-label='Закрыть модальное окно'
+								className={styles.modal__close}
+								onClick={handleModalClose}
+								type='button'>
+								<CloseIcon type='primary' />
+							</button>
+						</div>
+						{children}
+					</div>
+				</>
 			}
-		};
-		window.addEventListener('keydown', handleEscapePress);
-		return () => {
-			window.removeEventListener('keydown', handleEscapePress);
-		};
-	}, [onClose]);
-
-	return isMounted ? (
-		<Portal id={MODAL_CONTAINER_ID}>
-			<div className={modal.wrap}>
-				<div className={`pt-30 ${modal.content}`}>
-					<button onClick={onClose} className={`mt-15 mr-10 ${modal.close}`}>
-						<CloseIcon type='primary' />
-					</button>
-					<p className={`text text_type_main-large mt-15 ml-10 ${modal.title}`}>
-						{title}
-					</p>
-					{children}
-				</div>
-			</div>
-			<ModalOverlay close={onClose} />
-		</Portal>
-	) : null;
+		</>,
+		document.querySelector('#modal') as HTMLDivElement
+	);
 };
 
 export default Modal;
