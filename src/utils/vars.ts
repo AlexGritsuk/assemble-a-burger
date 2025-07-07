@@ -6,6 +6,10 @@ export const BUN = 'bun';
 export const SAUCE = 'sauce';
 export const MAIN = 'main';
 
+// WebSocket
+export const WSS_ALL_ORDERS = 'wss://norma.nomoreparties.space/orders/all';
+export const WSS_PROFILE_ORDERS = 'wss://norma.nomoreparties.space/orders';
+
 export const ingredientTabs = [
 	{
 		name: 'Булки',
@@ -36,6 +40,10 @@ export const RESET_PATH = '/reset-password';
 export const INGREDIENT = '/ingredients/:id';
 export const PROFILE_PATH = '/profile';
 export const ALL_PATH = '/*';
+export const ORDERS_PATH = '/profile/orders';
+export const FEED_PATH = '/feed';
+export const FEED_ORDER_PATH = '/feed/:id';
+export const ORDER_PATH = '/profile/orders/:id';
 
 //API
 export const SERVER_CONFIG = {
@@ -60,7 +68,6 @@ export const AUTH_LOGOUT = 'auth/logout';
 export const ACCESS_TOKEN = 'accessToken';
 export const REFRESH_TOKEN = 'refreshToken';
 export const EXPIRES_AT = 'expiresAt';
-
 export const ERROR_LOGIN = 'Неверное имя пользователя или пароль.';
 export const ERROR_USER_EXISTS = 'Пользователь с таким e-mail уже существует.';
 export const ERROR_DEFAULT = 'Что-то пошло не так!';

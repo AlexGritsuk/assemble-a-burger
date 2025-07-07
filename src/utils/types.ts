@@ -11,6 +11,7 @@ export type TIngredients = {
 	image_mobile: string;
 	image_large: string;
 	__v: number;
+	quantity?: number;
 	uuid?: string | undefined;
 };
 
@@ -137,8 +138,32 @@ export interface GetOrdersPromise {
 	success: boolean;
 }
 
-
 export interface TabShape {
 	name: string;
 	type: string;
-};
+}
+
+export interface WebsocketState {
+	orders: Order[] | null;
+	total: number;
+	totalToday: number;
+	wsConnected: boolean;
+}
+
+export interface WebsocketActions {
+	onClose: string;
+	onError: string;
+	onMessage: string;
+	onOpen: string;
+	wsInit: string;
+}
+
+export interface Order {
+	_id: string;
+	createdAt: string;
+	ingredients: string[];
+	name: string;
+	number: number;
+	status: 'created' | 'done' | 'pending';
+	updatedAt: string;
+}

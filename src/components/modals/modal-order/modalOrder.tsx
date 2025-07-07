@@ -5,8 +5,7 @@ import { selectOrderNumber } from '@services/reducers/orderSlice';
 
 const ModalOrder = () => {
 	const orderNum = useAppSelector(selectOrderNumber);
-	return (
-		<>
+	return (		
 			<div className={`${order.content}`}>
 				<div className={order.inner}>
 					<p className='text text_type_digits-large pb-8'>{orderNum}</p>
@@ -21,8 +20,7 @@ const ModalOrder = () => {
 						Дождитесь готовности на орбитальной станции
 					</p>
 				</div>
-			</div>
-		</>
+			</div>		
 	);
 };
 

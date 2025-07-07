@@ -12,7 +12,7 @@ export const loadingSlice = createSlice({
 	initialState,
 	name: 'loading',	
 	reducers: {
-		setLoading(state, action: PayloadAction<{ loading: boolean }>) {
+		setLoading(state, action: PayloadAction<{ loading: boolean }>) { 
 			state.loading = action.payload.loading;
 		},
 	},

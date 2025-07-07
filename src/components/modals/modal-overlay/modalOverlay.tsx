@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import clsx from 'clsx';
-
 import styles from './modalOverlay.module.scss';
 import { useAppSelector } from '../../../hooks/hooks';
 import {
 	getModalIngredient,
 	getModalOrder,
-	getModalOrderSuccess,
-	modalSlice,
+	getModalOrderSuccess,	
 } from '@services/reducers/modalSlice';
 
 interface modalOverlayProps {
