@@ -7,6 +7,6 @@ const RegisterPage = () => {
 			<Register />
 		</section>
 	);
-};
+}
 
 export default RegisterPage;
