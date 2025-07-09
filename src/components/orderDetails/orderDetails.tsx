@@ -5,7 +5,6 @@ import styles from './orderDetails.module.css';
 import { Order, TIngredients } from '@utils/types';
 import { useAppSelector } from '../../hooks/hooks';
 import { selectIngredients } from '@services/reducers/ingredientsSlice';
-import { ensureResult } from '@services/helpers/ensureResult';
 
 type Props = {
   order: Order
@@ -14,7 +13,18 @@ type Props = {
 const OrderDetails = ({ order }: Props) => {
   const date = new Date(order.createdAt);
   const ingredients = useAppSelector(selectIngredients);
-  const ingredientsArray = useMemo(() => order.ingredients.map((item) => ensureResult(ingredients.find(i => i._id === item))), [ingredients, order.ingredients]);
+ const ingredientsArray = useMemo(() => {
+		const result: TIngredients[] = [];
+		for (const id of order.ingredients) {
+			const ingredient = ingredients.find((i) => i._id === id);
+			if (ingredient) {
+				result.push(ingredient);
+			} else {
+				console.warn(`Ингредиент с id ${id} не найден`);				
+			}
+		}
+		return result;
+ }, [ingredients, order.ingredients]);
   const sortArray = useMemo(
     () => ingredientsArray.reduce((acc: TIngredients[], item) => {
       if (acc.find(i => i._id === item._id)) {
