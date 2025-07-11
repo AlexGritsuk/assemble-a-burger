@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useLogout } from '../../../hooks/useLogout';
 import styles from './profileMenu.module.scss';
 import { NavLink } from 'react-router-dom';
-import { HOME_PATH, ORDERS, PROFILE_PATH } from '@utils/vars';
+import { HOME_PATH, ORDERS, ORDERS_PATH, PROFILE_PATH } from '@utils/vars';
 
 const ProfileMenu = () => {
 	const { handleLogout } = useLogout();
@@ -25,7 +25,7 @@ const ProfileMenu = () => {
 						Профиль
 					</NavLink>
 				</li>
-				<li className={clsx(styles.item)}>
+				<li className={styles.item}>
 					<NavLink
 						className={({ isActive }) =>
 							clsx(
@@ -36,11 +36,11 @@ const ProfileMenu = () => {
 							)
 						}
 						end
-						to={HOME_PATH}>
+						to={ORDERS_PATH}>
 						История заказов
 					</NavLink>
 				</li>
-				<li className={clsx(styles.item)}>
+				<li className={styles.item}>
 					<button
 						className={clsx(
 							styles.link,

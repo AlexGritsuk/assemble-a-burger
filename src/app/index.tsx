@@ -7,9 +7,13 @@ import LoginPage from '@pages/loginPage/loginPage';
 import RegisterPage from '@pages/RegisterPage/registerPage';
 import ResetPage from '@pages/resetPassword/resetPassword';
 import {
+	FEED_ORDER_PATH,
+	FEED_PATH,
 	FORGOT_PATH,
 	HOME_PATH,
 	LOGIN_PATH,
+	ORDERS_PATH,
+	ORDER_PATH,
 	PROFILE_PATH,
 	REGISTER_PATH,
 	RESET_PATH,
@@ -36,16 +40,17 @@ import {
 } from '@services/reducers/ingredientsSlice';
 import Loader from '@components/loader/loader';
 import NotFoundPage from '@pages/notFound/notFound';
-import {	
-	selectLoading,
-	setLoading,
-} from '@services/reducers/loadingSlice';
+import { selectLoading, setLoading } from '@services/reducers/loadingSlice';
 import { fetchIngredients } from '@services/asyncThunk/fetchIngredients';
 import { selectGetUser } from '@services/reducers/userSlice';
 import { fetchGetUser } from '@services/asyncThunk/fetchGetUser';
 import ProfileLayout from '@components/profile/profileLayout';
 import ProfileForm from '@components/profile/profileForm/profileForm';
 import Notification from '@components/modals/notification/notification';
+import ProfileOrders from '@components/profile/profileOrder/profile-orders';
+import FeedPage from '@pages/feedPage/feedPage';
+import OrderPage from '@pages/orderPage/orderPage';
+import OrderDetails from '@components/orderDetails/orderDetails';
 
 export const App = () => {
 	const user = useAppSelector(selectGetUser);
@@ -152,7 +157,21 @@ export const App = () => {
 						}
 						path={PROFILE_PATH}>
 						<Route element={<ProfileForm />} index />
+						<Route element={<ProfileOrders />} path={ORDERS_PATH} />
 					</Route>
+
+					<Route element={<FeedPage />} path={FEED_PATH} />
+
+					<Route element={<OrderPage />} path={FEED_ORDER_PATH} />
+
+					<Route
+						element={
+							<ProtectedRoute>
+								<OrderPage />
+							</ProtectedRoute>
+						}
+						path={ORDER_PATH}
+					/>
 
 					<Route path='/ingredients/:id' element={<IngredientDetailsPage />} />
 
@@ -175,6 +194,7 @@ export const App = () => {
 				{background && modalIngredient && (
 					<IngredientDetails ingredient={modalIngredient} />
 				)}
+				{background && modalOrder && <OrderDetails order={modalOrder} />}
 				{orderNumber && modalOrderSuccess && <ModalOrder />}
 			</Modal>
 		</div>

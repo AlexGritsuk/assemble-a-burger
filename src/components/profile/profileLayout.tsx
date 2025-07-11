@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../hooks/hooks';
 import { Outlet, useLocation } from 'react-router-dom';
 import ProfileMenu from './profileMenu/profileMenu';
-import { selectGetUser, userSlice } from '@services/reducers/userSlice';
+import { selectGetUser } from '@services/reducers/userSlice';
 import styles from './profileLayout.module.scss';
 import { HOME_PATH, PROFILE_PATH } from '@utils/vars';
 import Loader from '@components/loader/loader';
@@ -16,7 +16,7 @@ const ProfileLayout = () => {
 				<ProfileMenu />
 				<>
 					{location.pathname === PROFILE_PATH && (
-						<p className='text text_type_main-default	text_color_inactive'>
+						<p className='text text_type_main-default text_color_inactive'>
 							В&nbsp;этом&nbsp;разделе вы можете изменить
 							свои&nbsp;персональные&nbsp;данные
 						</p>

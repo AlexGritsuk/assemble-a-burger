@@ -6,12 +6,12 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './app-header.module.scss';
 import { Link, useMatch } from 'react-router-dom';
-import { HOME_PATH, PROFILE_PATH } from '@utils/vars';
+import { FEED_PATH, HOME_PATH, PROFILE_PATH } from '@utils/vars';
 import { NavLink } from 'react-router-dom';
 
 export const AppHeader = () => {
-	const matchContructor = useMatch('/');    
-	
+	const matchContructor = useMatch('/');
+
 	return (
 		<header className={`pt-4 pb-4 ${styles.header}`}>
 			<div className={styles.container}>
@@ -33,11 +33,16 @@ export const AppHeader = () => {
 							</NavLink>
 						</li>
 						<li>
-							<a
-								className={`text_type_main-default mt-4 mb-4  ml-5 mr-5 ${styles.link}`}>
+							<NavLink
+								to={FEED_PATH}
+								className={({ isActive }) =>
+									`${!isActive ? styles.active : 'text_color_inactive'} ${
+										styles.link
+									} text text_type_main-default  mt-4 mb-4 ml-5 mr-5`
+								}>
 								<ListIcon type='primary' />
 								<span className={`ml-2`}>Лента заказов</span>
-							</a>
+							</NavLink>
 						</li>
 						<li className={styles.left}>
 							<NavLink
@@ -47,9 +52,7 @@ export const AppHeader = () => {
 									} text text_type_main-default  mt-4 mb-4 ml-5 mr-5`
 								}
 								to={PROFILE_PATH}>
-								<ProfileIcon
-									type={matchContructor ? 'primary' : 'secondary'}
-								/>
+								<ProfileIcon type={matchContructor ? 'primary' : 'secondary'} />
 								<span className={`ml-2`}>Личный кабинет</span>
 							</NavLink>
 						</li>

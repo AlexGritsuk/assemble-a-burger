@@ -9,6 +9,8 @@ import { passwordSlice } from './reducers/passwordSlice';
 import { registerSlice } from './reducers/registerSlice';
 import { orderSlice } from './reducers/orderSlice';
 import { cartSlice } from './reducers/cartSlice';
+import { wsActions, wsSlice } from './reducers/wsSlice';
+import { socketMiddleware } from './middleware/socketMiddleware';
 
 const rootReducer = combineSlices(
 	ingredientsSlice,
@@ -20,10 +22,13 @@ const rootReducer = combineSlices(
 	loginSlice,
 	passwordSlice,
 	registerSlice,
-	modalSlice
+	modalSlice,
+	wsSlice
 );
 
 const store = configureStore({
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat(socketMiddleware(wsActions)),
 	reducer: rootReducer,
 });
 
