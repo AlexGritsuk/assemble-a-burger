@@ -6,7 +6,6 @@ import reducer, {
 	CartState,
 } from './cartSlice';
 
-// Модели ингредиентов для тестов
 const bun = {
 	_id: '60d3b41abdacab0026a733c7',
 	name: 'Флюоресцентная булка R2-D3',
