@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchIngredients } from '@services/asyncThunk/fetchIngredients';
 import { TIngredients } from '@utils/types';
 
@@ -7,7 +7,7 @@ interface TIngredientsState {
 	ingredientsFetchFailed: boolean;
 	ingredientsFetchRequest: boolean;
 }
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
 	ingredients: [],
 	ingredientsFetchFailed: false,
 	ingredientsFetchRequest: false,

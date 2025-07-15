@@ -27,7 +27,7 @@ export type UserState = {
 	};
 };
 
-const initialState: UserState = {
+export const initialState: UserState = {
 	getUserRequest: {
 		error: false,
 		errorMessage: false,
@@ -167,3 +167,5 @@ export const selectUserRequest = (state: RootState) =>
 	state.user.patchUserRequest;
 
 export const { setError, updateUser } = userSlice.actions;
+
+export default userSlice.reducer;

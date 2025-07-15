@@ -70,7 +70,7 @@ export const REFRESH_TOKEN = 'refreshToken';
 export const EXPIRES_AT = 'expiresAt';
 export const ERROR_LOGIN = 'Неверное имя пользователя или пароль.';
 export const ERROR_USER_EXISTS = 'Пользователь с таким e-mail уже существует.';
-export const ERROR_DEFAULT = 'Что-то пошло не так!';
+export const ERROR_DEFAULT = 'Ошибка по умолчанию';
 export const PATTERN_EMAIL =
 	/(?:[a-z\d!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z\d!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\v\f\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\v\f\x0e-\x7f])*")@(?:(?:[a-z\d](?:[a-z\d-]*[a-z\d])?\.)+[a-z\d](?:[a-z\d-]*[a-z\d])?|\[(?:(?:25[0-5]|2[0-4]\d|[01]?\d{1,2})\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d{1,2}|[a-z\d-]*[a-z\d]:(?:[\x01-\x08\v\f\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\v\f\x0e-\x7f])+)\])/;
 export const NOTIFICATION_USER_CREATED = 'Пользователь успешно создан';
