@@ -22,8 +22,7 @@ export const fetchIngredients = createAsyncThunk<
 		const data = await getIngredients();
 		return data;
 	} catch (e) {
-		const rejectWithValue = thunkAPI.rejectWithValue;
-		// Приведение ошибки к нужному типу
+		const rejectWithValue = thunkAPI.rejectWithValue;		
 		const error = e as unknown as IngredientsError;
 		return rejectWithValue(error);
 	}
@@ -31,16 +30,3 @@ export const fetchIngredients = createAsyncThunk<
 
 
 
-// export const fetchIngredients = createAsyncThunk<
-// 	IngredientsPromise,
-// 	void,
-// 	{
-// 		rejectValue: IngredientsError;
-// 	}
-// >('ingredients/fetchIngredients', (_, thunkAPI) =>
-// 	getIngredients().catch((e) => {
-// 		const { rejectWithValue } = thunkAPI;
-// 		const hasErrorData = e as unknown as IngredientsError;
-// 		return rejectWithValue(hasErrorData);
-// 	})
-// );

@@ -56,7 +56,7 @@ export const registerSlice = createSlice({
 						state.errorMessageContent = message || ERROR_DEFAULT;
 					}
 				} else {
-					console.error('Ошибка при регистрации:', action.error);
+					console.error('Ошибка по умолчанию', action.error);
 					state.error = true;
 					state.errorMessageContent = ERROR_DEFAULT;
 				}
@@ -76,3 +76,5 @@ export const selectRegisterMessage = (state: RootState) =>
 	state.register.message;
 export const selectRegisterMessageContent = (state: RootState) =>
 	state.register.messageContent;
+
+	export default registerSlice.reducer;
