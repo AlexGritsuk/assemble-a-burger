@@ -79,7 +79,8 @@
 		"commit": "npm run check && cz",
 		"test": "jest",
 		"cypress": "cypress open",
-		"deploy": "gh-pages -d build"
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d dist"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.6.1",

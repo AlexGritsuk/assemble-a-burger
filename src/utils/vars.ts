@@ -32,7 +32,7 @@ export const TABS = {
 };
 
 //Routes
-export const HOME_PATH = '/';
+export const HOME_PATH = '/assemble-a-burger/';
 export const LOGIN_PATH = '/login';
 export const REGISTER_PATH = '/register';
 export const FORGOT_PATH = '/forgot-password';
