@@ -1,6 +1,6 @@
 describe('открытие деталей ингредиента', () => {
 	beforeEach(() => {
-		cy.visit('http://localhost:8080');
+		cy.visit('/assemble-a-burger/');
 	});
 
 	it('должен открыть страницу конструктора по умолчанию', () => {

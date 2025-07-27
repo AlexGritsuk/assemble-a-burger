@@ -1,6 +1,6 @@
 describe('Создание заказа', () => {
 	beforeEach(() => {
-		cy.visit('http://localhost:8080')
+		cy.visit('/assemble-a-burger/')
 	});
 	it('Проверка страницы конструктора по умолчанию', () => {
 		cy.contains('Соберите бургер')

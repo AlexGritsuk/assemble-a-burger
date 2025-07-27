@@ -64,6 +64,8 @@ export const AUTH_TOKEN = 'auth/token';
 export const AUTH_USER = 'auth/user';
 export const AUTH_LOGOUT = 'auth/logout';
 
+export const testUrl = 'http://localhost:8080';
+
 // Constants
 export const ACCESS_TOKEN = 'accessToken';
 export const REFRESH_TOKEN = 'refreshToken';
