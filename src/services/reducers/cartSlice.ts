@@ -11,7 +11,7 @@ export type CartState = {
 	ingredientsCounter: IngredientsCounter;
 };
 
-const initialState: CartState = {
+export const initialState: CartState = {
 	cart: {
 		bun: null,
 		ingredients: [],
@@ -85,3 +85,4 @@ export const cartSlice = createSlice({
 export const { addIngredient, cleanCart, moveIngredients, removeIngredient } =
 	cartSlice.actions;
 
+export default cartSlice.reducer

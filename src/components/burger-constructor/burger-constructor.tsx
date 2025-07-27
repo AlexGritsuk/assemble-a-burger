@@ -107,7 +107,7 @@ const BurgerConstructor = () => {
 			key={ingredient.uuid}
 			moveIngredient={moveIngredient}
 		/>
-	));	
+	));
 
 	const [{ isHover, canDrop }, dropTarget] = useDrop({
 		accept: 'ingredient',
@@ -136,7 +136,7 @@ const BurgerConstructor = () => {
 
 	return (
 		<section className={`mt-25 ${styles.section}`}>
-			<div ref={dropTarget}>
+			<div data-cy='burger-constructor' ref={dropTarget}>
 				{!cart.bun ? (
 					<BurgerEmpty
 						isLocked={true}

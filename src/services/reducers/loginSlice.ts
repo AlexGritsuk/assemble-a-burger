@@ -28,7 +28,7 @@ export const loginSlice = createSlice({
 		setMessage(state, action: PayloadAction<boolean>) {
 			state.message = action.payload;
 		},
-	},
+	}, 
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchLogin.pending, (state) => {
