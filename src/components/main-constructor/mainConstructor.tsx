@@ -14,7 +14,7 @@ const MainConstructor = () => {
 			setData({ ...data, loading: false });
 			try {
 				const res = await fetch(
-					'https://norma.nomoreparties.space/api/ingredients'
+					'https://norma.education-services.ru/api/ingredients'
 				);
 				if (!res.ok) {
 					throw new Error('Ответ сети был не ok');
